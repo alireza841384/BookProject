@@ -19,10 +19,14 @@ def add_Book(request):
     if request.method == "POST":
         form = BookForm(request.POST)
         if form.is_valid():
-            book = form.save(commit=False)
-            book.Creator = request.user
+            book = Book(
+                BookName=form.cleaned_data['BookName'],
+                Title=form.cleaned_data['Title'],
+                Author=form.cleaned_data['Author'],
+                Creator=request.user
+            )
             book.save()
-            return redirect('listView')
+            return redirect('/home/listView/')
     elif request.method == "GET":
         form = BookForm()
     return render(request, "books/add_books.html", {"form": form})
