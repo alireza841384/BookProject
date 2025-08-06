@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-@*(12i_mz#gzq_g5u$qx-@#nn_md1m@1%f0d_0o*9zrgh)-bp9"
- 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -37,7 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "account"
+    "account",
+    "books",
 ]
 
 MIDDLEWARE = [
@@ -99,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_URL = '/login/' 
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/home/'
 
 
@@ -120,10 +122,9 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-import os
 
 STATICFILES_DIRS = [
-     BASE_DIR / "static",
+    BASE_DIR / "static",
 ]
 
 

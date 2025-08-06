@@ -34,7 +34,7 @@ def loginView(request):
             error_message = "Incorrect username or password."
             return render(request, 'mypages/login.html', {
                 'error_message': error_message,
-                'username': username, 
+                'username': username,
             })
     else:
         return render(request, 'mypages/login.html')
