@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 
 class Book(models.Model):
     BookName = models.CharField(max_length=50)
-    Chocies = {"c1": "Derama", "c2": 'Action',
-               "c3": 'SienceFiction', "c4": 'Sience', "c5": "Story"}
+    Chocies = {"Derama": "Derama", "Action'": 'Action',
+               "SienceFiction": 'SienceFiction', "Sience": 'Sience', "Story": "Story"}
     Title = models.CharField(max_length=40, choices=Chocies)
     Author = models.CharField(max_length=40)
     TimeCreated = models.DateTimeField(auto_now=True)
