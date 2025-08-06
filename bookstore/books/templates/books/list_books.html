@@ -167,8 +167,8 @@
 
                 <nav>
                     <ul>
-                        <li><a href="listView/"><i class="fas fa-book"></i> List Books</a></li>
-                        <li><a href="\l"><i class="fas fa-plus-circle"></i> Add Book</a></li>
+                        <li><a href="/home/"><i class="fas fa-book"></i>Home</a></li>
+                        <li><a href="/a"><i class="fas fa-plus-circle"></i> Add Book</a></li>
                         <li><a href="\k"><i class="fas fa-user-cog"></i> My Account</a></li>
 
                         {% if user.is_authenticated %}
@@ -187,8 +187,10 @@
         <div class="container">
             <!-- Your main content goes here -->
             <div class="welcome-message">
-                <h1>Welcome to BookHub</h1>
-                <p>Manage your book collection with ease. Browse, add, and organize your books all in one place.</p>
+                <h1>List of yours Books</h1>
+                {%for book in books%}
+                <li><a href="detail/{{book.pk}}">{{book.BookName}} {{book.Title}}</a></li>
+                {%endfor%}
             </div>
         </div>
     </main>

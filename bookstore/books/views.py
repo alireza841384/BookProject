@@ -1,10 +1,13 @@
 from django.shortcuts import render
+from .models import Book
 
 # Create your views here.
 
 
 def List_view(request):
-    pass
+    books = Book.objects.filter(Creator=request.user)
+    context = {"books": books, 'user': request.user}
+    return render(request, 'list_books.html', context)
 
 
 def Book_Detail(requset, id):
