@@ -187,7 +187,7 @@
         <div class="container">
             <!-- Your main content goes here -->
             <div class="welcome-message">
-                <h1>List of yours Books</h1>
+                <h1>List of your Books</h1>
                 {%for book in books%}
                 <li><a href="detail/{{book.pk}}">{{book.BookName}} {{book.Title}}</a></li>
                 {%endfor%}

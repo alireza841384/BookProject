@@ -7,7 +7,7 @@ from .models import Book
 def List_view(request):
     books = Book.objects.filter(Creator=request.user)
     context = {"books": books, 'user': request.user}
-    return render(request, 'list_books.html', context)
+    return render(request, 'books/list_books.html', context)
 
 
 def Book_Detail(requset, id):
