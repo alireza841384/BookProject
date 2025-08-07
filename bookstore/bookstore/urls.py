@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from account.views import signupView, home, loginView
+from account.views import signupView, home, loginView , verify_email
 from django.contrib.auth.views import LogoutView, LoginView
 import books
 
@@ -28,4 +28,5 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(next_page='/login/'), name="logout"),
     path("", loginView, name="loginPage"),
     path('home/', include('books.urls')),
+    path('signup/verify/', verify_email, name="verify_email"),
 ]

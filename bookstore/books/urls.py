@@ -5,4 +5,5 @@ urlpatterns = [
     path("listView/", List_view),
     path("detail/<int:pk>/", Book_Detail),
     path("addBook/", add_Book),
+
 ]
