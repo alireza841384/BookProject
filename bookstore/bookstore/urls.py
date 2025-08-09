@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from account.views import signupView, home, loginView , verify_email , forgot_password_view , verify_forgot_code_view , reset_password_view
+from account.views import signupView, home, loginView, verify_email, forgot_password_view, verify_forgot_code_view, reset_password_view, AccountView
 from django.contrib.auth.views import LogoutView, LoginView
 import books
 
@@ -28,8 +28,10 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(next_page='/login/'), name="logout"),
     path("", loginView, name="loginPage"),
     path('home/', include('books.urls')),
+    path('home/Account/', AccountView, name="MyAccount"),
     path('signup/verify/', verify_email, name="verify_email"),
     path('forgot-password/', forgot_password_view, name='forgot_password'),
-    path('forgot-password/verify/', verify_forgot_code_view, name='verify_forgot_code'),
+    path('forgot-password/verify/', verify_forgot_code_view,
+         name='verify_forgot_code'),
     path('forgot-password/reset/', reset_password_view, name='reset_password'),
 ]

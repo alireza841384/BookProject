@@ -1,7 +1,16 @@
+from django.core.exceptions import ValidationError
+from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from .forms import CustomUserCreationForm, ProfileForm
+from django.conf import settings
+from django.core.mail import send_mail
+import random
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from .models import ProfileUser
 
 
 @login_required
@@ -12,29 +21,16 @@ def home(request):
 
 # account/views.py
 
-import random
-from django.core.mail import send_mail
-from django.conf import settings
-from .forms import CustomUserCreationForm
-from django.contrib.auth.models import User
-from django.contrib.auth import login
-from django.shortcuts import render, redirect
-from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
-
-
 
 def signupView(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-           
+
             email = form.cleaned_data['email']
-            
-           
+
             code = str(random.randint(100000, 999999))
 
-          
             request.session['temp_user_data'] = {
                 'username': form.cleaned_data['username'],
                 'email': email,
@@ -43,7 +39,6 @@ def signupView(request):
                 'code': code
             }
 
-         
             send_mail(
                 'Verification Code',
                 f'Your verification code is: {code}',
@@ -104,9 +99,8 @@ def loginView(request):
             })
     else:
         return render(request, 'mypages/login.html')
-    
-    
-    
+
+
 def generate_code():
     return str(random.randint(100000, 999999))
 
@@ -116,21 +110,21 @@ def forgot_password_view(request):
         username = request.POST['username']
         email = request.POST['email']
         try:
-            user = User.objects.get(username = username)
+            user = User.objects.get(username=username)
         except:
-            return render(request ,'mypages/forgot_password.html' , {'error' : 'Username not found.'} )
+            return render(request, 'mypages/forgot_password.html', {'error': 'Username not found.'})
         if user.email != email:
-            return render(request ,'mypages/forgot_password.html' , {'error' : 'Email does not match.'})
+            return render(request, 'mypages/forgot_password.html', {'error': 'Email does not match.'})
         code = generate_code()
         request.session['reset_user'] = user.username
         request.session['reset_code'] = code
         send_mail(
-            subject= 'BookManagement Password Reset Code',
+            subject='BookManagement Password Reset Code',
             message=f'Your password reset code is: {code}',
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[email]
         )
-        
+
         return redirect('verify_forgot_code')
     return render(request, 'mypages/forgot_password.html')
 
@@ -139,11 +133,10 @@ def verify_forgot_code_view(request):
     if request.method == 'POST':
         code = request.POST['code']
         if code == request.session.get('reset_code'):
-             return redirect('reset_password')
+            return redirect('reset_password')
         return render(request, 'mypages/forgot_verify_code.html', {'error': 'Invalid code.'})
-    
-    return render(request, 'mypages/forgot_verify_code.html')
 
+    return render(request, 'mypages/forgot_verify_code.html')
 
 
 def reset_password_view(request):
@@ -168,7 +161,7 @@ def reset_password_view(request):
             validate_password(new_pass, user=user)
         except ValidationError as e:
             return render(request, 'mypages/reset_password.html', {
-                'error': e.messages[0]  
+                'error': e.messages[0]
             })
 
         user.set_password(new_pass)
@@ -183,7 +176,16 @@ def reset_password_view(request):
     return render(request, 'mypages/reset_password.html')
 
 
-    
-
-    
-                
+def AccountView(request):
+    try:
+        Profile = request.user.profile
+    except ProfileUser.DoesNotExist:
+        Profile = ProfileUser(user=request.user)
+    if request.method == 'GET':
+        form = ProfileForm(instance=Profile)
+    elif request.method == "POST":
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('home')
+    return render(request, "mypages/edit_account.html", {"form": form})
