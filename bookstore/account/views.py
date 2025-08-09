@@ -180,12 +180,14 @@ def AccountView(request):
     try:
         Profile = request.user.profile
     except ProfileUser.DoesNotExist:
-        Profile = ProfileUser(user=request.user)
+        Profile = ProfileUser.objects.create(user=request.user)
     if request.method == 'GET':
         form = ProfileForm(instance=Profile)
     elif request.method == "POST":
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, instance=Profile)
         if form.is_valid():
-            form.save()
+            Profile = form.save(commit=False)
+            Profile.user = request.user
+            Profile.save()
         return redirect('home')
     return render(request, "mypages/edit_account.html", {"form": form})
