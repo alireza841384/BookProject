@@ -1,203 +1,172 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Management System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #166088;
-            --accent-color: #4fc3f7;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --success-color: #28a745;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Management</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #003366;
+      overflow: hidden;
+    }
 
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 40px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    header h1 {
+      font-size: 24px;
+      color: #003366;
+    }
 
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .account-btn {
+      background-color: #003366;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-        }
+    .account-btn:hover {
+      background-color: #002244;
+    }
 
-        .logo span {
-            color: var(--accent-color);
-        }
+    main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
 
-        /* Navigation Styles */
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
+    .intro {
+      flex: 0 0 65%;
+      padding: 60px 40px 60px 60px;
+      background-color: #e6f2ff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: calc(100vh - 110px);
+    }
 
-        nav ul li {
-            margin-left: 1.5rem;
-        }
+    .subtitle {
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #003366;
+      margin-bottom: 10px;
+    }
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-        }
+    .intro h2 {
+      font-size: 36px;
+      color: #003366;
+      margin-bottom: 20px;
+    }
 
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
+    .description {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 30px;
+      max-width: 400px;
+    }
 
-        nav ul li a i {
-            margin-right: 8px;
-        }
+    .buttons {
+      display: flex;
+      gap: 15px;
+    }
 
-        /* User Info Styles */
-        .user-info {
-            display: flex;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            margin-left: 2rem;
-        }
+    .buttons button {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
 
-        .user-info i {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
+    .buttons button:hover {
+      background-color: #002244;
+    }
 
-        /* Main Content Styles */
-        main {
-            padding: 2rem 0;
-            min-height: calc(100vh - 180px);
-        }
+    .images {
+      flex: 0 0 35%;
+      background-color: rgba(0, 51, 102, 0.3);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 110px);
+      overflow: hidden;
+    }
 
-        .welcome-message {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-        }
+    .images img {
+      width: 100%;
+      max-height: 48%;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .welcome-message h1 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav ul {
-                margin-top: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            nav ul li {
-                margin: 0.5rem;
-            }
-
-            .user-info {
-                margin: 1rem auto 0;
-            }
-        }
-    </style>
+  </style>
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="/home/" class="logo">Book<span>Hub</span></a>
+  <header>
+    <h1>Book Management</h1>
+    <div class="menu">
+      <a href="{% url 'MyAccount' %}" class="account-btn">My Account</a>
+    </div>
+  </header>
 
-                <nav>
-                    <ul>
-                        <li><a href="listView/"><i class="fas fa-book"></i> List Books</a></li>
-                        <li><a href="addBook/"><i class="fas fa-plus-circle"></i> Add Book</a></li>
-                        <li><a href="Account/"><i class="fas fa-user-cog"></i> My Account</a></li>
+  <main>
+    <section class="intro">
+      <p class="subtitle">YOUR GATEWAY TO ENDLESS STORIES</p>
+      <h2>EXPLORE BOOKHUB'S COLLECTION</h2>
+      <p class="description">
+        Access thousands of titles across genres and connect with readers worldwide. Start your next great read today.
+      </p>
+      <div class="buttons">
+        <a href="{% url 'book_list' %}"><button>Browse Books</button></a>
+        <a href="{% url 'add_book' %}"><button>Add Book</button></a>
+      </div>
+    </section>
 
-                        {% if user.is_authenticated %}
-                        <li class="user-info">
-                            <i class="fas fa-user"></i>
-                            <span>{{ user.username }}</span>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <div class="container">
-            <!-- Your main content goes here -->
-            <div class="welcome-message">
-                <h1>Welcome to BookHub</h1>
-                <p>Manage your book collection with ease. Browse, add, and organize your books all in one place.</p>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; BookHub. All rights reserved.</p>
-        </div>
-    </footer>
+    <section class="images">
+      <img src="{% static 'images/book-window1.jpg' %}" alt="Books by window" />
+      <img src="{% static 'images/pages-closeup1.jpg' %}" alt="Book pages closeup" />
+    </section>
+  </main>
 </body>
 
 </html>

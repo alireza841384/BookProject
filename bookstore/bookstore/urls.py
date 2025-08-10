@@ -24,14 +24,15 @@ import books
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("signup/", signupView, name="signup"),
-    path("home/", home, name="home"),
+    path("home/", home, name="home"),  # صفحه‌ی اصلی
     path("logout/", LogoutView.as_view(next_page='/login/'), name="logout"),
     path("", loginView, name="loginPage"),
-    path('home/', include('books.urls')),
-    path('home/Account/', AccountView, name="MyAccount"),
+    path('books/', include('books.urls')),  # تغییر مسیر از home به books
+    path('Account/', AccountView, name="MyAccount"),
     path('signup/verify/', verify_email, name="verify_email"),
     path('forgot-password/', forgot_password_view, name='forgot_password'),
-    path('forgot-password/verify/', verify_forgot_code_view,
-         name='verify_forgot_code'),
+    path('forgot-password/verify/', verify_forgot_code_view, name='verify_forgot_code'),
     path('forgot-password/reset/', reset_password_view, name='reset_password'),
 ]
+
+
