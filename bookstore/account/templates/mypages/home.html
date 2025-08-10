@@ -43,6 +43,18 @@
       gap: 15px;
     }
 
+    .user-box {
+      background-color: #003366;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      margin-right: 10px;
+      user-select: none;
+    }
+
     .account-btn {
       background-color: #003366;
       color: white;
@@ -137,7 +149,6 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-
   </style>
 </head>
 
@@ -145,6 +156,7 @@
   <header>
     <h1>Book Management</h1>
     <div class="menu">
+      <div class="user-box">{{ user.username }}</div>
       <a href="{% url 'MyAccount' %}" class="account-btn">My Account</a>
     </div>
   </header>
