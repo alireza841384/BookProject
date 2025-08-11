@@ -17,6 +17,8 @@
             --accent-color: #4fc3f7;
             --light-color: #f8f9fa;
             --dark-color: #343a40;
+            --username-color: #4fc3f7;
+            /* رنگ آبی روشن برای نام کاربری */
         }
 
         body {
@@ -24,20 +26,105 @@
             background-color: #f5f5f5;
         }
 
+        header {
+            background: linear-gradient(135deg, #3a5f8a, #0d4b75);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .user-info:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .user-info i {
+            color: white;
+        }
+
+        .user-info span {
+            color: var(--username-color);
+            /* اعمال رنگ جدید */
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
         .profile-card {
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
         }
 
         .profile-header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border-radius: 10px 10px 0 0 !important;
+            padding: 1.2rem;
         }
 
         .form-control:focus {
             border-color: var(--accent-color);
             box-shadow: 0 0 0 0.25rem rgba(79, 195, 247, 0.25);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #3a5f8a;
+            border-color: #3a5f8a;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
         }
     </style>
 </head>
@@ -45,25 +132,23 @@
 <body>
     <header>
         <div class="container">
-            <div class="header-content py-3">
-                <a href="/home/" class="logo text-decoration-none text-white fs-3 fw-bold">Book<span
-                        style="color: var(--accent-color);">Hub</span></a>
+            <div class="header-content">
                 <nav>
                     <ul class="list-unstyled d-flex align-items-center mb-0">
-                        <li class="me-4"><a href="/home/listView/" class="text-white text-decoration-none"><i
-                                    class="fas fa-book me-2"></i>List Books</a></li>
-                        <li class="me-4"><a href="/home/addBook/" class="text-white text-decoration-none"><i
+                        <li><a href="/home/" class="text-decoration-none"><i class="fas fa-home me-2"></i>Home</a></li>
+                        <li><a href="/home/listView/" class="text-decoration-none"><i class="fas fa-book me-2"></i>List
+                                Books</a></li>
+                        <li><a href="/home/addBook/" class="text-decoration-none"><i
                                     class="fas fa-plus-circle me-2"></i>Add Book</a></li>
-                        <li class="me-4"><a href="/home/Account/" class="text-white text-decoration-none"><i
-                                    class="fas fa-user-cog me-2"></i>My Account</a></li>
                         {% if user.is_authenticated %}
-                        <li class="user-info bg-white bg-opacity-10 px-3 py-1 rounded-pill">
-                            <i class="fas fa-user me-2"></i>
+                        <li class="user-info">
+                            <i class="fas fa-user"></i>
                             <span>{{ user.username }}</span>
                         </li>
                         {% endif %}
                     </ul>
                 </nav>
+                <a href="/home/" class="logo text-decoration-none">Book<span>Hub</span></a>
             </div>
         </div>
     </header>
@@ -72,15 +157,14 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="card profile-card mb-5">
-                        <div class="card-header profile-header py-3">
+                    <div class="card profile-card">
+                        <div class="card-header profile-header">
                             <h3 class="mb-0"><i class="fas fa-user-edit me-2"></i>Edit Profile</h3>
                         </div>
                         <div class="card-body p-4">
                             <form method="post">
                                 {% csrf_token %}
 
-                                <!-- First Name -->
                                 <div class="mb-3">
                                     <label for="{{ form.firstName.id_for_label }}" class="form-label">First Name</label>
                                     {{ form.firstName }}
@@ -93,7 +177,6 @@
                                     {% endif %}
                                 </div>
 
-                                <!-- Last Name -->
                                 <div class="mb-3">
                                     <label for="{{ form.lastName.id_for_label }}" class="form-label">Last Name</label>
                                     {{ form.lastName }}
@@ -106,19 +189,16 @@
                                     {% endif %}
                                 </div>
 
-                                <!-- Gender -->
                                 <div class="mb-3">
                                     <label for="{{ form.gender.id_for_label }}" class="form-label">Gender</label>
                                     {{ form.gender }}
                                 </div>
 
-                                <!-- Birthday -->
                                 <div class="mb-3">
                                     <label for="{{ form.birthday.id_for_label }}" class="form-label">Birthday</label>
                                     {{ form.birthday }}
                                 </div>
 
-                                <!-- Phone -->
                                 <div class="mb-4">
                                     <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number</label>
                                     {{ form.phone }}
@@ -144,9 +224,9 @@
         </div>
     </main>
 
-    <footer class="bg-dark text-white py-4">
+    <footer>
         <div class="container text-center">
-            <p class="mb-0">&copy; BookHub. All rights reserved.</p>
+            <p class="mb-0">&copy; 2023 BookHub. All rights reserved.</p>
         </div>
     </footer>
 
