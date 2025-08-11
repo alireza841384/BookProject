@@ -13,7 +13,7 @@ def List_view(request):
 
 def Book_Detail(request, pk):
     book = get_object_or_404(Book, pk=pk)
-    return render(request , 'books/book_detail.html', {'book': book})
+    return render(request, 'books/book_detail.html', {'book': book})
 
 
 def add_Book(request):
@@ -33,5 +33,11 @@ def add_Book(request):
     return render(request, "books/add_books.html", {"form": form})
 
 
-def delete_book(request):
-    pass
+def delete_book(request, pk):
+    user = request.user
+    try:
+        targetBook = Book.objects.get(Creator=user, pk=pk)
+    except Book.DoesNotExist:
+        return redirect('home')
+    targetBook.delete()
+    return redirect('/home/listView/')
