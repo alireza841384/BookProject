@@ -1,4 +1,4 @@
-{% load static %}
+<!-- {% load static %}
 <!DOCTYPE html>
 <html lang="fa">
 
@@ -158,6 +158,245 @@
     <div class="menu">
       <div class="user-box">{{ user.username }}</div>
       <a href="{% url 'MyAccount' %}" class="account-btn">My Account</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="subtitle">YOUR GATEWAY TO ENDLESS STORIES</p>
+      <h2>EXPLORE BOOKHUB'S COLLECTION</h2>
+      <p class="description">
+        Access thousands of titles across genres and connect with readers worldwide. Start your next great read today.
+      </p>
+      <div class="buttons">
+        <a href="{% url 'book_list' %}"><button>Browse Books</button></a>
+        <a href="{% url 'add_book' %}"><button>Add Book</button></a>
+      </div>
+    </section>
+
+    <section class="images">
+      <img src="{% static 'images/book-window1.jpg' %}" alt="Books by window" />
+      <img src="{% static 'images/pages-closeup1.jpg' %}" alt="Book pages closeup" />
+    </section>
+  </main>
+</body>
+
+</html> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Management</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #003366;
+      overflow: hidden;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 40px;
+    }
+
+    .header-bottom {
+      background-color: #e6f2ff;
+      padding: 12px 40px;
+      color: #003366;
+      border-top: 1px solid #cce0ff;
+      font-weight: bold;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: #003366;
+      margin: 0;
+    }
+
+    .user-box {
+      background-color: #003366;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+      position: relative;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .user-box::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: #4CAF50;
+      border-radius: 50%;
+      margin-left: 8px;
+    }
+
+    .account-btn,
+    .logout-btn {
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .account-btn {
+      background-color: #003366;
+      margin-right: 10px;
+    }
+
+    .account-btn:hover {
+      background-color: #002244;
+      transform: translateY(-1px);
+    }
+
+    .logout-btn {
+      background-color: #e74c3c;
+    }
+
+    .logout-btn:hover {
+      background-color: #c0392b;
+      transform: translateY(-1px);
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .intro {
+      flex: 0 0 65%;
+      padding: 60px 40px 60px 60px;
+      background-color: #e6f2ff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: calc(100vh - 158px);
+    }
+
+    .subtitle {
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #003366;
+      margin-bottom: 10px;
+    }
+
+    .intro h2 {
+      font-size: 36px;
+      color: #003366;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 30px;
+      max-width: 400px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .buttons button {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .buttons button:hover {
+      background-color: #002244;
+    }
+
+    .images {
+      flex: 0 0 35%;
+      background-color: rgba(0, 51, 102, 0.3);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 158px);
+      overflow: hidden;
+    }
+
+    .images img {
+      width: 100%;
+      max-height: 48%;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-top">
+      <div class="header-left">
+        <h1>Book Management</h1>
+        <div class="user-box">{{ user.username }}</div>
+      </div>
+      <div class="user-section">
+        <a href="{% url 'MyAccount' %}" class="account-btn">My Account</a>
+        <a href="/" class="logout-btn">Logout</a>
+      </div>
+    </div>
+    <div class="header-bottom">
+      Welcome {{ user.username }}
     </div>
   </header>
 
