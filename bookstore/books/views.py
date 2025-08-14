@@ -1,13 +1,40 @@
+from django.utils import timezone
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Book
 from .forms import BookForm
-
-# Create your views here.
-
+from django.db.models import Q
 
 def List_view(request):
-    books = Book.objects.filter(Creator=request.user)
-    context = {"books": books, 'user': request.user}
+    books = Book.objects.filter(Creator=request.user).order_by('-TimeCreated')
+
+    search_query = request.GET.get('search', '').strip()
+    search_in = request.GET.get('search_in', 'both')
+    date_filter = request.GET.get('date', 'all')
+
+    if search_query:
+        if search_in == 'book':
+            books = books.filter(BookName__icontains=search_query)
+        elif search_in == 'author':
+            books = books.filter(Author__icontains=search_query)
+        else:  # both
+            books = books.filter(
+                Q(BookName__icontains=search_query) |
+                Q(Author__icontains=search_query)
+            )
+
+    today = timezone.localdate()
+    if date_filter == 'today':
+        books = books.filter(TimeCreated__date=today)
+    elif date_filter == 'this_month':
+        books = books.filter(TimeCreated__year=today.year, TimeCreated__month=today.month)
+  
+
+    context = {
+        'books': books,
+        'search_query': search_query,
+        'search_in': search_in,
+        'date_filter': date_filter,
+    }
     return render(request, 'books/list_books.html', context)
 
 

@@ -1,204 +1,3 @@
-<!-- {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Management System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #166088;
-            --accent-color: #4fc3f7;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --success-color: #28a745;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-        }
-
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            margin-left: 2rem;
-        }
-
-        .user-info i {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
-
-        main {
-            padding: 2rem 0;
-            min-height: calc(100vh - 180px);
-        }
-
-        .welcome-message {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-        }
-
-        .welcome-message h1 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav ul {
-                margin-top: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            nav ul li {
-                margin: 0.5rem;
-            }
-
-            .user-info {
-                margin: 1rem auto 0;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="/home/" class="logo">Book<span>Hub</span></a>
-
-                <nav>
-                    <ul>
-                        <li><a href="/home/"><i class="fas fa-home me-2"></i>Home</a></li>
-                        <li><a href="/home/addBook/"><i class="fas fa-plus-circle"></i> Add Book</a></li>
-                        <li><a href="/Account/"><i class="fas fa-user-cog"></i> My Account</a></li>
-
-                        {% if user.is_authenticated %}
-                        <li class="user-info">
-                            <i class="fas fa-user"></i>
-                            <span>{{ user.username }}</span>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <div class="container">
-            <div class="welcome-message">
-                <h1>List of your Books</h1>
-                <ul>
-                    {% for book in books %}
-                    <li>
-                        <a href="{% url 'book_detail' book.pk %}">
-                            {{ book.BookName }} {{ book.Title }}
-                        </a>
-                    </li>
-                    {% empty %}
-                    <li>No books found.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; BookHub. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-
-</html> -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -206,243 +5,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Management System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <title>BookHub - Your Book Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #166088;
-            --accent-color: #4fc3f7;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --success-color: #28a745;
-            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --radius: 8px;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        * { 
+            margin:0; 
+            padding:0; 
+            box-sizing:border-box; 
+            font-family: 'Poppins', sans-serif; 
+        }
+        
+        body { 
+            background:#f5f5f5; 
+            color:#333; 
+            line-height:1.6; 
+        }
+        
+        .container { 
+            max-width: 1200px; 
+            margin:0 auto; 
+            padding:0 20px; 
         }
 
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
+        /* استایل هدر */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
         }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .header-content { 
+            display:flex; 
+            justify-content:space-between; 
+            align-items:center; 
+            flex-wrap:wrap; 
+        }
+        
+        .logo { 
+            font-size:1.8rem; 
+            font-weight:700; 
+            color:white; 
+        }
+        
+        .logo span { 
+            color: var(--accent); 
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
+        nav ul { 
+            display:flex; 
+            list-style:none; 
+            flex-wrap:wrap; 
+            margin:0; 
+        }
+        
+        nav ul li { 
+            margin-left:1rem; 
+        }
+        
+        nav ul li a { 
+            color:white; 
+            font-weight:500; 
+            padding:0.5rem 1rem; 
+            border-radius: var(--radius); 
+            transition:0.3s; 
+            display:flex; 
+            align-items:center; 
+        }
+        
+        nav ul li a:hover { 
+            background: rgba(255,255,255,0.2); 
+        }
+        
+        nav ul li a i { 
+            margin-right:6px; 
         }
 
-        .logo span {
-            color: var(--accent-color);
+        .user-info { 
+            display:flex; 
+            align-items:center; 
+            background: rgba(255,255,255,0.1); 
+            padding:0.5rem 1rem; 
+            border-radius:50px; 
+            margin-left:1rem; 
+        }
+        
+        .user-info i { 
+            margin-right:6px; 
+            font-size:1.1rem; 
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
+        /* استایل اصلی محتوا */
+        main { 
+            display:flex; 
+            gap:30px; 
+            margin-top:2rem; 
         }
 
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-        }
-
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        nav ul li a i {
-            margin-right: 8px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            margin-left: 2rem;
-        }
-
-        .user-info i {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
-
-        main {
-            padding: 2rem 0;
-            min-height: calc(100vh - 180px);
-        }
-
-        .page-title {
-            color: var(--primary-color);
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            text-align: center;
-        }
-
-        /* استایل جدید برای نمایش کتاب‌ها */
+        /* استایل کارت کتاب‌ها - نسخه اصلاح شده */
         .books-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 280px));
+            justify-content: center;
+            gap: 25px;
+            flex: 1;
         }
 
         .book-card {
-            background-color: white;
-            border-radius: 8px;
+            width: 280px;
+            height: 420px;
+            background: white;
+            border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--card-shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .book-cover {
-            height: 200px;
-            background-color: #eee;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            flex-direction: column;
+        }
+
+        .book-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow:0 6px 12px rgba(0,0,0,0.15); 
+        }
+
+        .book-cover { 
+            height:220px; 
+            flex-shrink: 0;
+            overflow:hidden; 
+            display:flex; 
+            align-items:center; 
+            justify-content:center; 
+            background:#eee; 
+        }
+        
+        .book-cover img { 
+            width:100%; 
+            height:100%; 
+            object-fit:cover; 
+        }
+
+        .book-details { 
+            padding:1.5rem; 
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .book-title { 
+            font-size:1.2rem; 
+            font-weight:600; 
+            color:var(--dark); 
+            margin-bottom:0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
-        .book-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        
+        .book-author { 
+            font-size:0.95rem; 
+            color:#666; 
+            margin-bottom:1rem; 
+        }
+        
+        .book-meta { 
+            display:flex; 
+            justify-content:space-between; 
+            align-items:center; 
+            font-size:0.85rem; 
+            margin-top: auto;
+        }
+        
+        .book-year { 
+            color:#777; 
+        }
+        
+        .view-btn { 
+            background: var(--primary); 
+            color:white; 
+            padding:0.5rem 1rem; 
+            border-radius: var(--radius); 
+            font-size:0.85rem; 
+            transition:0.3s; 
+        }
+        
+        .view-btn:hover { 
+            background: var(--secondary); 
         }
 
-        .book-cover .default-cover {
-            font-size: 3rem;
-            color: var(--primary-color);
+        .no-books { 
+            text-align:center; 
+            padding:2rem; 
+            background:white; 
+            border-radius: var(--radius); 
+            box-shadow: var(--card-shadow); 
+            grid-column: 1 / -1;
         }
 
-        .book-details {
-            padding: 1.5rem;
-        }
-
-        .book-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--dark-color);
-        }
-
-        .book-author {
-            color: #666;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .book-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-        }
-
-        .book-year {
-            color: #777;
-        }
-
-        .view-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .view-btn:hover {
-            background-color: var(--secondary-color);
-        }
-
-        .no-books {
-            text-align: center;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 8px;
+        /* جستجو و فیلتر */
+        .search-box {
+            background:white;
+            padding:20px;
+            border-radius: var(--radius);
             box-shadow: var(--card-shadow);
+            width:300px;
+            min-height:600px;
+            flex-shrink:0;
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
         }
 
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
+        .search-box h3 { 
+            margin-bottom:15px; 
+            color:var(--primary); 
+            font-weight:600; 
+        }
+
+        .form-group { 
+            margin-bottom:15px; 
+        }
+        
+        .form-group label { 
+            display:block; 
+            margin-bottom:5px; 
+            font-weight:500; 
+            color:var(--dark); 
+        }
+        
+        .form-group input[type="text"] { 
+            width:100%; 
+            padding:8px 10px; 
+            border:1px solid #ddd; 
+            border-radius:var(--radius); 
+        }
+        
+        .form-group input[type="radio"] { 
+            margin-right:6px; 
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color:white;
+            padding:10px 0;
+            font-weight:600;
+            border:none;
+            border-radius:var(--radius);
+            width:100%;
+            cursor:pointer;
+            transition:0.3s;
+        }
+        
+        .btn-primary:hover { 
+            background: var(--secondary); 
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 992px) {
+            main { 
+                flex-direction: column-reverse; 
+            }
+            
+            .search-box { 
+                width:100%; 
+                min-height:auto; 
+                position: static; 
+                margin-bottom: 30px;
+            }
         }
 
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
+            .header-content { 
+                flex-direction: column; 
                 text-align: center;
             }
-
-            nav ul {
+            
+            nav ul { 
                 margin-top: 1rem;
-                flex-wrap: wrap;
                 justify-content: center;
             }
-
-            nav ul li {
-                margin: 0.5rem;
+            
+            .user-info { 
+                margin: 1rem auto 0; 
             }
-
-            .user-info {
-                margin: 1rem auto 0;
+            
+            .books-container {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 260px));
             }
+            
+            .book-card {
+                width: 260px;
+            }
+        }
 
+        @media (max-width: 480px) {
             .books-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .book-card {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
             }
         }
     </style>
@@ -453,18 +329,13 @@
         <div class="container">
             <div class="header-content">
                 <a href="/home/" class="logo">Book<span>Hub</span></a>
-
                 <nav>
                     <ul>
                         <li><a href="/home/"><i class="fas fa-home"></i> Home</a></li>
                         <li><a href="/home/addBook/"><i class="fas fa-plus-circle"></i> Add Book</a></li>
-                        <li><a href="/Account/"><i class="fas fa-user-cog"></i> My Account</a></li>
-
+                        <li><a href="/home/myAccount/"><i class="fas fa-user-cog"></i> My Account</a></li>
                         {% if user.is_authenticated %}
-                        <li class="user-info">
-                            <i class="fas fa-user"></i>
-                            <span>{{ user.username }}</span>
-                        </li>
+                        <li class="user-info"><i class="fas fa-user"></i>{{ user.username }}</li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -472,52 +343,62 @@
         </div>
     </header>
 
-    <main>
-        <div class="container">
-            <h1 class="page-title">Your Book Collection</h1>
-
+    <main class="container">
+        <!-- Books -->
+        <div class="books-container">
             {% if books %}
-            <div class="books-container">
                 {% for book in books %}
                 <div class="book-card">
                     <div class="book-cover">
                         {% if book.cover_image %}
-                        <img src="{{ book.cover_image.url }}" alt="{{ book.BookName }} cover">
+                        <img src="{{ book.cover_image.url }}" alt="{{ book.BookName }} cover" />
                         {% else %}
-                        <img src="{% static 'images/book-window1.jpg' %}" alt="Books by window" />
+                        <img src="{% static 'images/book-window1.jpg' %}" alt="Default book cover" />
                         {% endif %}
                     </div>
                     <div class="book-details">
                         <h3 class="book-title">{{ book.BookName }}</h3>
                         <p class="book-author">{{ book.Author }}</p>
                         <div class="book-meta">
-                            <span class="book-year">{{ book.TimeCreated }}</span>
-                            <a href="{% url 'book_detail' book.pk %}" class="view-btn">
-                                <i class="fas fa-eye"></i> View
-                            </a>
+                            <span class="book-year">{{ book.TimeCreated|date:"Y-m-d" }}</span>
+                            <a href="{% url 'book_detail' book.pk %}" class="view-btn"><i class="fas fa-eye"></i> View</a>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-            </div>
             {% else %}
             <div class="no-books">
-                <i class="fas fa-book" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                <i class="fas fa-book" style="font-size:3rem; color:var(--primary); margin-bottom:1rem;"></i>
                 <h3>No Books Found</h3>
                 <p>You haven't added any books yet.</p>
-                <a href="/home/addBook/" class="view-btn" style="margin-top: 1rem;">
-                    <i class="fas fa-plus-circle"></i> Add Your First Book
-                </a>
+                <a href="/home/addBook/" class="view-btn" style="margin-top:1rem;"><i class="fas fa-plus-circle"></i> Add Your First Book</a>
             </div>
             {% endif %}
         </div>
+
+        <!-- Search & Filter -->
+        <aside class="search-box">
+            <h3>Search & Filter</h3>
+            <form method="get" action="">
+                <div class="form-group">
+                    <label for="search">Search</label>
+                    <input type="text" id="search" name="search" placeholder="Enter book or author" value="{{ search_query }}">
+                </div>
+                <div class="form-group">
+                    <label>Search in</label>
+                    <label><input type="radio" name="search_in" value="both" {% if search_in == 'both' %}checked{% endif %} /> Both</label>
+                    <label><input type="radio" name="search_in" value="book" {% if search_in == 'book' %}checked{% endif %} /> Book</label>
+                    <label><input type="radio" name="search_in" value="author" {% if search_in == 'author' %}checked{% endif %} /> Author</label>
+                </div>
+                <div class="form-group">
+                    <label>Date Filter</label>
+                    <label><input type="radio" name="date" value="all" {% if date_filter == 'all' %}checked{% endif %} /> All</label>
+                    <label><input type="radio" name="date" value="today" {% if date_filter == 'today' %}checked{% endif %} /> Today</label>
+                    <label><input type="radio" name="date" value="this_month" {% if date_filter == 'this_month' %}checked{% endif %} /> This Month</label>
+                </div>
+                <button type="submit" class="btn-primary">Search</button>
+            </form>
+        </aside>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; BookHub. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
-
 </html>
