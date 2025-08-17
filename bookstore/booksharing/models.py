@@ -50,7 +50,10 @@ class SharePanelControl(models.Model):
     def is_Blocked(self,user):
         pass
 
-    def 
+    
+
+
+
 
 
 

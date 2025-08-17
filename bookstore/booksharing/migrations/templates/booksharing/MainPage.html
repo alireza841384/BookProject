@@ -1,0 +1,409 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub - Share Codes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --danger: #dc3545;
+            --radius: 8px;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --dark-blue: #1a4b8c; /* رنگ آبی پررنگ جدید */
+        }
+
+        * { 
+            margin:0; 
+            padding:0; 
+            box-sizing:border-box; 
+            font-family: 'Poppins', sans-serif; 
+        }
+        
+        body { 
+            background:#f5f5f5; 
+            color:#333; 
+            line-height:1.6;
+            padding-top: 80px;
+        }
+        
+        .container { 
+            max-width: 1200px; 
+            margin:0 auto; 
+            padding:0 20px; 
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--card-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content { 
+            display:flex; 
+            justify-content:space-between; 
+            align-items:center; 
+            flex-wrap:wrap; 
+        }
+        
+        .logo { 
+            font-size:1.8rem; 
+            font-weight:700; 
+            color:white; 
+        }
+        
+        .logo span { 
+            color: var(--accent); 
+        }
+
+        nav ul { 
+            display:flex; 
+            list-style:none; 
+            flex-wrap:wrap; 
+            margin:0; 
+        }
+        
+        nav ul li { 
+            margin-left:1rem; 
+        }
+        
+        nav ul li a { 
+            color:white; 
+            font-weight:500; 
+            padding:0.5rem 1rem; 
+            border-radius: var(--radius); 
+            transition:0.3s; 
+            display:flex; 
+            align-items:center; 
+            text-decoration: none;
+        }
+        
+        nav ul li a:hover { 
+            background: rgba(255,255,255,0.2); 
+        }
+        
+        nav ul li a i { 
+            margin-right:6px; 
+        }
+
+        .user-info { 
+            display:flex; 
+            align-items:center; 
+            background: rgba(255,255,255,0.1); 
+            padding:0.5rem 1rem; 
+            border-radius:50px; 
+            margin-left:1rem; 
+            text-decoration: none;
+        }
+        
+        .user-info i { 
+            margin-right:6px; 
+            font-size:1.1rem; 
+        }
+
+        main { 
+            display:flex; 
+            gap:30px; 
+            margin-top:1rem;
+            padding: 20px 0;
+        }
+
+        /* استایل‌های جدید برای صفحه اشتراک‌گذاری */
+        .share-container {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .left-panel {
+            flex: 1;
+            background: var(--dark-blue); /* رنگ آبی پررنگ */
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            color: white; /* متن سفید برای خوانایی بهتر */
+        }
+
+        .right-panel {
+            flex: 2;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2); /* خط سفید نیمه شفاف */
+        }
+
+        .left-panel .panel-header {
+            color: white;
+        }
+
+        .right-panel .panel-header {
+            color: var(--primary);
+            border-bottom-color: #eee;
+        }
+
+        .search-box-share {
+            margin-bottom: 20px;
+        }
+
+        .search-box-share input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+        }
+
+        .share-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .share-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .left-panel .share-item {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .right-panel .share-item {
+            border-bottom-color: #f0f0f0;
+        }
+
+        .share-item:last-child {
+            border-bottom: none;
+        }
+
+        .share-info {
+            flex: 1;
+        }
+
+        .share-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .left-panel .share-name {
+            color: white;
+        }
+
+        .share-date {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .left-panel .share-date {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .share-code {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            word-break: break-all;
+            border: 1px dashed rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        .btn-view {
+            background: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-view:hover {
+            background: var(--secondary);
+        }
+
+        .btn-block {
+            background: #ff6b6b;
+            color: white;
+            padding: 6px 12px;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-block:hover {
+            background: #ff5252;
+        }
+
+        .no-items {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+        }
+
+        .left-panel .no-items {
+            color: rgba(255,255,255,0.7);
+        }
+
+        @media (max-width: 992px) {
+            .share-container {
+                flex-direction: column;
+            }
+            
+            .left-panel, .right-panel {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 120px;
+            }
+            
+            .header-content { 
+                flex-direction: column; 
+                text-align: center;
+            }
+            
+            nav ul { 
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .user-info { 
+                margin: 1rem auto 0; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/home/" class="logo">Book<span>Hub</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="/home/"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="/home/share-codes/" class="active"><i class="fas fa-share-alt"></i> Share Codes</a></li>
+                        <li><a href="/home/myAccount/"><i class="fas fa-user-cog"></i> My Account</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="user-info"><i class="fas fa-user"></i>{{ user.username }}</li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="share-container">
+            <!-- پنل سمت چپ - آبی پررنگ -->
+            <div class="left-panel">
+                <h3 class="panel-header">My Share Code</h3>
+                
+                <div class="share-code">
+                    {{ user.share_code }}
+                </div>
+                
+                <h4 class="panel-header">Connected Users</h4>
+                
+                <div class="share-list">
+                    {% if connected_users %}
+                        {% for user in connected_users %}
+                        <div class="share-item">
+                            <div class="share-info">
+                                <div class="share-name">{{ user.username }}</div>
+                                <div class="share-date">Connected on {{ user.connection_date|date:"Y-m-d" }}</div>
+                            </div>
+                            <button class="btn-block">
+                                <i class="fas fa-ban"></i> Block
+                            </button>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-items">
+                            <i class="fas fa-users-slash" style="font-size:2rem; margin-bottom:1rem;"></i>
+                            <p>No users connected yet</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- پنل سمت راست -->
+            <div class="right-panel">
+                <h3 class="panel-header">Enter Share Code</h3>
+                
+                <div class="search-box-share">
+                    <input type="text" placeholder="Enter share code...">
+                </div>
+                
+                <h4 class="panel-header">My Shared Connections</h4>
+                
+                <div class="share-list">
+                    {% if shared_connections %}
+                        {% for connection in shared_connections %}
+                        <div class="share-item">
+                            <div class="share-info">
+                                <div class="share-name">{{ connection.username }}</div>
+                                <div class="share-date">Shared on {{ connection.share_date|date:"Y-m-d" }}</div>
+                            </div>
+                            <a href="{% url 'view_profile' connection.id %}" class="btn-view">
+                                <i class="fas fa-eye"></i> View
+                            </a>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-items">
+                            <i class="fas fa-code" style="font-size:2rem; margin-bottom:1rem;"></i>
+                            <p>No shared connections yet</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
