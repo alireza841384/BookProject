@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import ProfileUser
+from django.contrib import messages
 
 
 @login_required
@@ -191,3 +192,27 @@ def AccountView(request):
             Profile.save()
         return redirect('home')
     return render(request, "mypages/edit_account.html", {"form": form})
+
+
+@login_required
+def DeleteAccount(request):
+    if request.method == "GET":
+        return render(request=request, template_name="mypages/deleteAcc.html")
+
+    elif request.method == "POST":
+        passwd = request.POST['password']
+        try:
+            user = request.user
+            if user.check_password(passwd):
+                user.delete()
+                messages.success(request, "your account deleted successfuly")
+                redirect("/")
+            else:
+                messages.error(request, "password is inavlid")
+                return render(request=request, template_name="mypages/deleteAcc.html")
+
+        except User.DoesNotExist:
+            messages.error(
+                request, "An error occurred while deleting your account")
+
+        return render(request=request, template_name="mypages/deleteAcc.html")
